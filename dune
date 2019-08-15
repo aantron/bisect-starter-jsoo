@@ -6,4 +6,4 @@
 (executable
  (name tester)
  (modules tester)
- (libraries hello))
+ (libraries bisect_ppx.runtime hello))
