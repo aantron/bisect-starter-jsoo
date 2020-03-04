@@ -6,7 +6,7 @@ cd bisect-starter-jsoo
 opam install -y --deps-only .
 BISECT_ENABLE=yes dune build ./tester.bc.js
 node _build/default/tester.bc.js
-dune exec bisect-ppx-report -- --html _coverage/ *.out
+dune exec bisect-ppx-report -- html
 ```
 
 These commands generate
