@@ -1,6 +1,6 @@
 language: generic
 
-before_script:
+install:
   - wget https://github.com/ocaml/opam/releases/download/2.0.6/opam-2.0.6-x86_64-linux
   - sudo mv opam-2.0.6-x86_64-linux /usr/local/bin/opam
   - sudo chmod a+x /usr/local/bin/opam
@@ -9,7 +9,10 @@ before_script:
   - ocaml -version
 
 script:
+  # For https://github.com/ocaml/dune/pull/3177.
+  - opam pin add -y --dev-repo dune --no-action
   - opam install -y --deps-only .
+  - opam list
   - BISECT_ENABLE=yes dune build ./tester.bc.js
   - node _build/default/tester.bc.js
   - dune exec bisect-ppx-report -- html
