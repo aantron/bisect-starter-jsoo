@@ -12,7 +12,3 @@ depends: [
   "js_of_ocaml"
   "ocaml"
 ]
-
-pin-depends: [
-  ["bisect_ppx.git" "git+https://github.com/aantron/bisect_ppx.git"]
-]
