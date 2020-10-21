@@ -9,22 +9,15 @@ install:
   - ocaml -version
 
 script:
-  # For https://github.com/ocaml/dune/pull/3177.
-  - opam pin add -y --dev-repo dune --no-action
   - opam install -y --deps-only .
   - opam list
-  - BISECT_ENABLE=yes dune build ./tester.bc.js
+  - dune build ./tester.bc.js --instrument-with bisect_ppx
   - node _build/default/tester.bc.js
-  - dune exec bisect-ppx-report -- html
+  - bisect-ppx-report html
   - cat _coverage/index.html
-  - dune exec bisect-ppx-report -- summary
+  - bisect-ppx-report summary
 
 cache:
   directories:
     - $HOME/.opam
     - ./_opam
-
-notifications:
-  email:
-    on_success: always
-    on_failure: always

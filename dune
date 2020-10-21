@@ -1,20 +1,10 @@
-(* -*- tuareg -*- *)
-
-let preprocess =
-  match Sys.getenv "BISECT_ENABLE" with
-  | "yes" -> "(preprocess (pps bisect_ppx))"
-  | _ | exception _ -> ""
-
-let () = Jbuild_plugin.V1.send @@ {|
-
 (library
  (name hello)
  (modules hello)
- |} ^ preprocess ^ {|)
+ (instrumentation (backend bisect_ppx)))
 
 (executable
  (name tester)
+ (modes js)
  (modules tester)
  (libraries bisect_ppx.runtime hello))
-
-|}

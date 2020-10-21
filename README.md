@@ -4,6 +4,7 @@
 git clone https://github.com/aantron/bisect-starter-jsoo.git
 cd bisect-starter-jsoo
 opam install -y --deps-only .
+
 BISECT_ENABLE=yes dune build ./tester.bc.js
 node _build/default/tester.bc.js
 dune exec bisect-ppx-report -- html
